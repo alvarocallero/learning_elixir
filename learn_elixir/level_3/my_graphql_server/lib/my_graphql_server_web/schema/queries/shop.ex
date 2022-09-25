@@ -6,6 +6,7 @@ defmodule MyGraphqlServerWeb.Schema.Queries.Shop do
   use Absinthe.Schema.Notation
 
   object :shop_queries do
+
     field :shop, :shop do
       arg :id, non_null(:id)
 
