@@ -15,4 +15,11 @@ defmodule GraphqlApiWeb.Types.User do
     field(:likes_phone_calls, :boolean)
     field(:likes_faxes, :boolean)
   end
+
+  @desc "Input object for user preferences"
+  input_object :input_user_preferences do
+    field(:likes_emails, :boolean)
+    field(:likes_phone_calls, :boolean)
+    field(:likes_faxes, :boolean)
+  end
 end

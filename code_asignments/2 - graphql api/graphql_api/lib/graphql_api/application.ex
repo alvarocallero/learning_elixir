@@ -8,12 +8,12 @@ defmodule GraphqlApi.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Telemetry supervisor
-      GraphqlApiWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: GraphqlApi.PubSub},
       # Start the Endpoint (http/https)
-      GraphqlApiWeb.Endpoint
+      GraphqlApiWeb.Endpoint,
+      {Absinthe.Subscription, [GraphqlApiWeb.Endpoint]}
+
       # Start a worker by calling: GraphqlApi.Worker.start_link(arg)
       # {GraphqlApi.Worker, arg}
     ]

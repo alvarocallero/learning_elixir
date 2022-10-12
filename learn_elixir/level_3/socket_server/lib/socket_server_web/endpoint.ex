@@ -2,17 +2,11 @@ defmodule SocketServerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :socket_server
   use Absinthe.Phoenix.Endpoint
 
+  #To hit the socket url go to: ws://localhost:4000/socket
+  #To hit secure socket url go to: wss://localhost:4000/socket
   socket "/socket", SocketServerWeb.UserSocket, websocket: true
 
-  # Serve at "/" the static files from "priv/static" directory.
-  #
-  # You should set gzip to true if you are running phx.digest
-  # when deploying your static files in production.
-  plug Plug.Static,
-    at: "/",
-    from: :socket_server,
-    gzip: false,
-    only: ~w(assets fonts images favicon.ico robots.txt)
+
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

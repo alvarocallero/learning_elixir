@@ -47,6 +47,28 @@ defmodule GraphqlApiWeb.User do
     }
   ]
 
+  def create(id, params) do
+    case find_by_id(%{id: id}) do
+      {:ok, _user} -> {:error, %{message: "user already exists", details: %{id: id}}}
+      _ -> {:ok, params}
+    end
+  end
+
+  def update_preferences(id, params) do
+    with {:ok, user} <- find_by_id(%{id: id}),
+         {:ok, _} <- empty_preferences?(params.preferences) do
+      {:ok, %{user | preferences: params.preferences}}
+    else
+      error -> error
+    end
+  end
+
+  def update_user(id, params) do
+    with {:ok, user} <- find_by_id(%{id: id}) do
+      {:ok, Map.merge(user, params)}
+    end
+  end
+
   def find_by_id(%{id: id}) do
     case Enum.find(@users, &(&1.id === id)) do
       nil -> {:error, %{message: "not found", details: %{id: id}}}
@@ -173,4 +195,8 @@ defmodule GraphqlApiWeb.User do
       users -> {:ok, users}
     end
   end
+
+  defp empty_preferences?(preferences) when preferences === %{}, do: {:error, %{message: "at least one preference must be provided", details: preferences}}
+  defp empty_preferences?(_preferences), do: {:ok, ""}
+
 end

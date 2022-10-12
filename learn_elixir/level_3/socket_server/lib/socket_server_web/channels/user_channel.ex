@@ -8,10 +8,10 @@ defmodule SocketServerWeb.UserChannel do
 
   #essentially responds to
   #different messages that are pushed to our server from the client
-  #Every time a new user is created the all the users that are subrscriber to the topic of users will be notified
+  #Every time a new user is created then all the users that are subrscribed to the topic of users will be notified
   #about the creation of the new user
   def handle_in("new_user", %{"id" => id}, socket) do
-    broadcast "new_user", socket, %{"id" => id}
+    broadcast socket, "new_user" , %{"id" => id}
 
     {:reply, %{"accepted" => true}, socket}
   end

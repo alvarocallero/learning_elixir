@@ -34,6 +34,8 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/absinthe_plug" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/nimble_parsec" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/absinthe" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/absinthe_phoenix" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/decimal" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="phoenix" level="project" />
@@ -83,5 +85,6 @@
     <orderEntry type="library" name="benchee" level="project" />
     <orderEntry type="library" name="mix_test_watch" level="project" />
     <orderEntry type="library" name="makeup_graphql" level="project" />
+    <orderEntry type="library" name="absinthe_phoenix" level="project" />
   </component>
 </module>
