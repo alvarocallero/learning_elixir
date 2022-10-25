@@ -12,7 +12,7 @@ defmodule GraphqlApi.Application do
       {Phoenix.PubSub, name: GraphqlApi.PubSub},
       # Start the Endpoint (http/https)
       GraphqlApiWeb.Endpoint,
-      {Absinthe.Subscription, [GraphqlApiWeb.Endpoint]}
+      {Absinthe.Subscription, GraphqlApiWeb.Endpoint}
 
       # Start a worker by calling: GraphqlApi.Worker.start_link(arg)
       # {GraphqlApi.Worker, arg}

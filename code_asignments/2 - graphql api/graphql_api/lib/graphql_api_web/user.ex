@@ -196,7 +196,8 @@ defmodule GraphqlApiWeb.User do
     end
   end
 
-  defp empty_preferences?(preferences) when preferences === %{}, do: {:error, %{message: "at least one preference must be provided", details: preferences}}
-  defp empty_preferences?(_preferences), do: {:ok, ""}
+  defp empty_preferences?(preferences) when preferences === %{},
+    do: {:error, %{message: "at least one preference must be provided", details: preferences}}
 
+  defp empty_preferences?(_preferences), do: {:ok, ""}
 end

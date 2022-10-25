@@ -2,7 +2,9 @@ defmodule GraphqlApiWeb.UserSocket do
   use Phoenix.Socket
 
   use Absinthe.Phoenix.Socket,
-      schema: GraphqlApiWeb.Schema
+    schema: GraphqlApiWeb.Schema
+
+  channel "users:*", SocketServerWeb.UserChannel
 
   @impl true
   def connect(_params, socket, _connect_info) do
