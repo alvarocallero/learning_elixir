@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="error_message" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/error_message/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/error_message/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/error_message/lib" />
+      <root url="file://$PROJECT_DIR$/deps/error_message/lib" />
+    </SOURCES>
+  </library>
+</component>

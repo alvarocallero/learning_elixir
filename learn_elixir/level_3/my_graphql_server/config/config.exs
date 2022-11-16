@@ -7,6 +7,17 @@
 # General application configuration
 import Config
 
+config :my_graphql_server, MyGraphqlServer.Repo,
+  database: "my_graphql_server_repo",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost"
+
+config :my_graphql_server,
+       ecto_repos: [MyGraphqlServer.Repo]
+
+config :ecto_shorts, repo: MyGraphqlServer.Repo, error_module: EctoShorts.Actions.Error
+
 # Configures the endpoint
 config :my_graphql_server, MyGraphqlServerWeb.Endpoint,
   url: [host: "localhost"],

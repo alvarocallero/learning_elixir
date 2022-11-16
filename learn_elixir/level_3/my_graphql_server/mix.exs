@@ -42,7 +42,11 @@ defmodule MyGraphqlServer.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:absinthe, "~> 1.7"},
-      {:absinthe_plug, "~> 1.5"}
+      {:absinthe_plug, "~> 1.5"},
+      {:ecto_sql, "~> 3.9"},
+      {:postgrex, "~> 0.16.5"},
+      {:dataloader, "~> 1.0"},
+      {:ecto_shorts, "~> 2.2"}
     ]
   end
 

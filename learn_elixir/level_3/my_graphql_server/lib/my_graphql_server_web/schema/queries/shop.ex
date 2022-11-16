@@ -15,7 +15,9 @@ defmodule MyGraphqlServerWeb.Schema.Queries.Shop do
 
     field :shops, list_of(:shop) do
       arg :category, :shop_category
-
+      arg :name, :string
+      arg :first, :integer
+      arg :after, :integer
       resolve &Resolvers.Shop.all/2
     end
   end

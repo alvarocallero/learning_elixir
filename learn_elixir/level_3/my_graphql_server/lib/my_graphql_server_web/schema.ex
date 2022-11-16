@@ -13,4 +13,14 @@ defmodule MyGraphqlServerWeb.Schema do
   mutation do
     import_fields :shop_mutations
   end
+
+  def context(ctx) do
+    source = Dataloader.Ecto.new(MyGraphqlServer.Repo)
+    dataloader = Dataloader.add_source(Dataloader.new(), MyGraphqlServer.Retail, source)
+    Map.put(ctx, :loader, dataloader)
+  end
+
+  def plugins do
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
+  end
 end

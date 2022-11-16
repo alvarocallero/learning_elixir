@@ -38,6 +38,15 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/nimble_parsec" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/telemetry" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/telemetry_metrics" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/postgrex" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/db_connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ecto_sql" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ecto" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/decimal" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/dataloader" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/error_message" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ecto_shorts" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="phoenix" level="project" />
@@ -93,5 +102,16 @@
     <orderEntry type="library" name="benchee" level="project" />
     <orderEntry type="library" name="mix_test_watch" level="project" />
     <orderEntry type="library" name="makeup_graphql" level="project" />
+    <orderEntry type="library" name="postgrex" level="project" />
+    <orderEntry type="library" name="db_connection" level="project" />
+    <orderEntry type="library" name="myxql" level="project" />
+    <orderEntry type="library" name="tds" level="project" />
+    <orderEntry type="library" name="benchee_json" level="project" />
+    <orderEntry type="library" name="table" level="project" />
+    <orderEntry type="library" name="connection" level="project" />
+    <orderEntry type="library" name="ecto_shorts" level="project" />
+    <orderEntry type="library" name="error_message" level="project" />
+    <orderEntry type="library" name="credo" level="project" />
+    <orderEntry type="library" name="blitz_credo_checks" level="project" />
   </component>
 </module>

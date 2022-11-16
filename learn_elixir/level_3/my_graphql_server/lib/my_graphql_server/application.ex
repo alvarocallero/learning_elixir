@@ -13,7 +13,8 @@ defmodule MyGraphqlServer.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: MyGraphqlServer.PubSub},
       # Start the Endpoint (http/https)
-      MyGraphqlServerWeb.Endpoint
+      MyGraphqlServerWeb.Endpoint,
+      MyGraphqlServer.Repo
       # Start a worker by calling: MyGraphqlServer.Worker.start_link(arg)
       # {MyGraphqlServer.Worker, arg}
     ]

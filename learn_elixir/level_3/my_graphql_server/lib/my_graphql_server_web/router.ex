@@ -11,8 +11,7 @@ defmodule MyGraphqlServerWeb.Router do
     forward "/graphql", Absinthe.Plug, schema: MyGraphqlServerWeb.Schema
 
     if Mix.env() === :dev do
-      forward "/graphiql", Absinthe.Plug.GraphiQL, schema: MyGraphqlServerWeb.Schema,
-                                                   interface: :playground
+      forward "/graphiql", Absinthe.Plug.GraphiQL, schema: MyGraphqlServerWeb.Schema
     end
 
   end
