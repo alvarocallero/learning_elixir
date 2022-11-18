@@ -1,6 +1,5 @@
 defmodule MyGraphqlServer.Retail do
 
-  alias MyGraphqlServer.Repo
   alias MyGraphqlServer.Retail.Shop
   alias EctoShorts.Actions
 
