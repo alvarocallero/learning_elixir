@@ -3,9 +3,9 @@ defmodule GraphqlApi.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :name, :string
-      add :email, :string
-      add :preference_id, references(:preferences, on_delete: :nothing)
+      add :name, :text
+      add :email, :text
+      add :preference_id, references(:preferences, on_delete: :delete_all)
     end
 
     create index(:users, [:preference_id])

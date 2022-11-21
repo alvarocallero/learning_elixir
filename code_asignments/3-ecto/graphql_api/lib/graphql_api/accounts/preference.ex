@@ -10,11 +10,17 @@ defmodule GraphqlApi.Accounts.Preference do
 
    @available_fields [:likes_emails, :likes_phone_calls, :likes_faxes]
 
+  def create_changeset(params) do
+    changeset(%GraphqlApi.Accounts.Preference{}, params)
+  end
+
   @doc false
   def changeset(preference, attrs) do
     preference
     |> cast(attrs, @available_fields)
     |> validate_required(@available_fields)
   end
+
+
 
 end

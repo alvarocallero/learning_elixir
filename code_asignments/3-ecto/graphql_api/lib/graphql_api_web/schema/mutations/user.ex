@@ -6,7 +6,6 @@ defmodule GraphqlApiWeb.Schema.Mutations.User do
   object :user_mutations do
     @desc "Create a new user. If the user already exists then an error is returned"
     field :create_user, :user do
-      arg :id, non_null :id
       arg :name, non_null :string
       arg :email, non_null :string
       arg :preferences, non_null :input_user_preferences

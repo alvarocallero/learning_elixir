@@ -3,6 +3,8 @@ defmodule GraphqlApi.Accounts do
   alias GraphqlApi.Accounts.User
   alias EctoShorts.Actions
 
+  require Logger
+
   def list_users(params \\ %{}) do
     Actions.all(User, params)
   end
