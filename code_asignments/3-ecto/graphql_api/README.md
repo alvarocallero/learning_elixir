@@ -32,3 +32,13 @@ https://nts.strzibny.name/graphql-subscriptions-with-elixir-and-absinth/
 
 I have the same issue as the Create User Subscription Mutation.
 
+
+alias GraphqlApi.Accounts.{Preference, User}
+alias GraphqlApi.Repo
+import Ecto.Query
+
+query = from p in "preferences",
+where: p.likes_emails == true
+select: p.likes_emails
+
+Repo.all(query)

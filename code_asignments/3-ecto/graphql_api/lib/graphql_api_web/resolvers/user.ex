@@ -1,5 +1,6 @@
 defmodule GraphqlApiWeb.Resolver.User do
   alias GraphqlApi.Accounts
+  alias GraphqlApi.Repo
 
   require Logger
 
@@ -11,7 +12,7 @@ defmodule GraphqlApiWeb.Resolver.User do
 
   def filter_by_preferences(params, _) do
     users =
-    %{preferences: params}
+    params
     |> Accounts.list_users()
     {:ok, users}
   end

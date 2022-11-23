@@ -2,6 +2,7 @@ defmodule GraphqlApi.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
+  require Logger
 
 
   schema "users" do
@@ -24,13 +25,23 @@ defmodule GraphqlApi.Accounts.User do
     |> cast_assoc(:preference)
   end
 
-#  def join_preference(query \\ GraphqlApi.Accounts.User) do
-#    join(query, :inner, [u], p in assoc(u, :preference), as: :preference)
-#  end
-#
-#  def by_preference(query \\ join_preference(), likes_emails) do
-#    where(query, [preference: p], p.likes_emails == ^likes_emails)
-#  end
+  def join_preference(query \\ GraphqlApi.Accounts.User) do
+    join(query, :inner, [u], p in assoc(u, :preference), as: :preference)
+  end
+
+  def by_likes_emails(query, likes_emails) do
+    where(query, [preference: p], p.likes_emails == ^likes_emails)
+  end
+
+  def by_likes_faxes(query, likes_faxes) do
+    where(query, [preference: p], p.likes_faxes == ^likes_faxes)
+  end
+
+  def by_likes_phone_calls(query, phone_calls) do
+    where(query, [preference: p], p.likes_phone_calls == ^phone_calls)
+  end
+
+
 
 
 

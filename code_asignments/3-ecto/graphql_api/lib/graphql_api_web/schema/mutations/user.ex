@@ -8,7 +8,7 @@ defmodule GraphqlApiWeb.Schema.Mutations.User do
     field :create_user, :user do
       arg :name, non_null :string
       arg :email, non_null :string
-      arg :preferences, non_null :input_user_preferences
+      arg :preference, non_null :input_user_preferences
 
       resolve &Resolver.User.create/2
     end
