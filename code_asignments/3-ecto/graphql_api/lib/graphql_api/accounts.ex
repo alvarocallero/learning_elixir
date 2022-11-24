@@ -1,13 +1,13 @@
 defmodule GraphqlApi.Accounts do
-
   alias EctoShorts.Actions
-  alias GraphqlApi.{Repo, Accounts.User}
+  alias GraphqlApi.{Repo, Accounts.User, Accounts.Preference}
 
   require Logger
+
   def list_users(params) do
     params
     |> Enum.reduce(User.join_preference(), &convert_field_to_query/2)
-    |> Repo.all
+    |> Repo.all()
   end
 
   def convert_field_to_query({:likes_emails, value}, query) do
@@ -22,8 +22,6 @@ defmodule GraphqlApi.Accounts do
     User.by_likes_phone_calls(query, value)
   end
 
-
-
   def find_user(params) do
     Actions.find(User, params)
   end
@@ -33,7 +31,12 @@ defmodule GraphqlApi.Accounts do
   end
 
   def create_user(params) do
-    Actions.create(Accounts.User, params)
+    Actions.create(User, params)
   end
 
+  def update_preferences(user, preferences) do
+    preference = Repo.get(Preference, user.preference_id)
+    changeset = Preference.changeset(preference, preferences)
+    Repo.update(changeset)
+  end
 end

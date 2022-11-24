@@ -4,11 +4,10 @@ defmodule GraphqlApi.Accounts.User do
   import Ecto.Query
   require Logger
 
-
   schema "users" do
-    field :email, :string
-    field :name, :string
-    belongs_to :preference, GraphqlApi.Accounts.Preference
+    field(:email, :string)
+    field(:name, :string)
+    belongs_to(:preference, GraphqlApi.Accounts.Preference)
   end
 
   @available_fields [:name, :email]
@@ -16,6 +15,8 @@ defmodule GraphqlApi.Accounts.User do
   def create_changeset(params) do
     changeset(%GraphqlApi.Accounts.User{}, params)
   end
+
+
 
   @doc false
   def changeset(user, attrs) do
@@ -40,9 +41,4 @@ defmodule GraphqlApi.Accounts.User do
   def by_likes_phone_calls(query, phone_calls) do
     where(query, [preference: p], p.likes_phone_calls == ^phone_calls)
   end
-
-
-
-
-
 end

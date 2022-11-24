@@ -14,7 +14,7 @@ config :graphql_api, GraphqlApi.Repo,
   hostname: "localhost"
 
 config :graphql_api,
-       ecto_repos: [GraphqlApi.Repo]
+  ecto_repos: [GraphqlApi.Repo]
 
 config :ecto_shorts, repo: GraphqlApi.Repo, error_module: EctoShorts.Actions.Error
 
