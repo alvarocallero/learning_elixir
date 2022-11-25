@@ -2,12 +2,11 @@ defmodule GraphqlApi.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  require Logger
 
   schema "users" do
     field(:email, :string)
     field(:name, :string)
-    belongs_to(:preference, GraphqlApi.Accounts.Preference)
+    has_one(:preference, GraphqlApi.Accounts.Preference)
   end
 
   @available_fields [:name, :email]
@@ -15,8 +14,6 @@ defmodule GraphqlApi.Accounts.User do
   def create_changeset(params) do
     changeset(%GraphqlApi.Accounts.User{}, params)
   end
-
-
 
   @doc false
   def changeset(user, attrs) do

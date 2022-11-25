@@ -1,6 +1,7 @@
 defmodule GraphqlApi.Accounts do
   alias EctoShorts.Actions
   alias GraphqlApi.{Repo, Accounts.User, Accounts.Preference}
+  import Ecto.Query
 
   require Logger
 
@@ -26,8 +27,17 @@ defmodule GraphqlApi.Accounts do
     Actions.find(User, params)
   end
 
+  def get_user_with_preferences(%{id: id}) do
+    user = Repo.one(from(u in User, where: u.id == ^id)) |> Repo.preload(:preference)
+    {:ok, user}
+  end
+
   def update_user(id, params) do
     Actions.update(User, id, params)
+  end
+
+  def update_preference(id, params) do
+    Actions.update(Preference, id, params)
   end
 
   def create_user(params) do
@@ -35,8 +45,10 @@ defmodule GraphqlApi.Accounts do
   end
 
   def update_preferences(user, preferences) do
-    preference = Repo.get(Preference, user.preference_id)
-    changeset = Preference.changeset(preference, preferences)
-    Repo.update(changeset)
+    Repo.get(Preference, user.preference.id)
+    |> Preference.changeset(preferences)
+    |> Repo.update!()
+
+    {:ok, user}
   end
 end

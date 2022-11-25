@@ -1,4 +1,4 @@
-#defmodule GraphqlApiWeb.User do
+# defmodule GraphqlApiWeb.User do
 #  @moduledoc """
 #    This module will contain the data about the users and the functions to retrieve those data.
 #  """
@@ -93,4 +93,4 @@
 #    do: {:error, %{message: "at least one preference must be provided", details: preferences}}
 #
 #  defp empty_preferences?(_preferences), do: {:ok, ""}
-#end
+# end

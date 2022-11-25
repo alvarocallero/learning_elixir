@@ -1,13 +1,10 @@
 defmodule GraphqlApiWeb.Resolver.User do
   alias GraphqlApi.Accounts
-  alias GraphqlApi.Repo
 
   require Logger
 
   def find_by_id(%{id: id}, _) do
     id = String.to_integer(id)
-
-    result =
       %{id: id}
       |> Accounts.find_user()
       |> build_response
@@ -23,6 +20,7 @@ defmodule GraphqlApiWeb.Resolver.User do
 
   def update(%{id: id} = params, _) do
     id = String.to_integer(id)
+
     params =
       params
       |> Map.delete(:id)
@@ -36,7 +34,7 @@ defmodule GraphqlApiWeb.Resolver.User do
   end
 
   def update_preferences(%{id: id} = params, _) do
-    with {:ok, user} <- Accounts.find_user(%{id: id}),
+    with {:ok, user} <- Accounts.get_user_with_preferences(%{id: id}),
          {:ok, _} <- empty_preferences?(params.preferences) do
       Accounts.update_preferences(user, params.preferences)
     else
@@ -52,7 +50,7 @@ defmodule GraphqlApiWeb.Resolver.User do
   end
 
   defp empty_preferences?(preferences) when preferences === %{},
-       do: {:error, %{message: "at least one preference must be provided", details: preferences}}
+    do: {:error, %{message: "at least one preference must be provided", details: preferences}}
 
-  defp empty_preferences?(_preferences), do: {:ok, ""}
+  defp empty_preferences?(_preferences), do: {:ok, " "}
 end
