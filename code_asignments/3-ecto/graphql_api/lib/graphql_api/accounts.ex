@@ -6,9 +6,35 @@ defmodule GraphqlApi.Accounts do
   require Logger
 
   def list_users(params) do
-    params
-    |> Enum.reduce(User.join_preference(), &convert_field_to_query/2)
-    |> Repo.all()
+    ecto_shorts_filters = Enum.reduce(params, %{}, &convert_field_to_map/2)
+
+    cond do
+      ecto_shorts_filters === %{} ->
+        params
+        |> Enum.reduce(User.join_preference(), &convert_field_to_query/2)
+        |> Repo.all()
+
+      true ->
+        params
+        |> Enum.reduce(User.join_preference(), &convert_field_to_query/2)
+        |> Actions.all(ecto_shorts_filters)
+    end
+  end
+
+  def convert_field_to_map({:first, value}, filters) do
+    Map.put(filters, :first, value)
+  end
+
+  def convert_field_to_map({:before, value}, filters) do
+    Map.put(filters, :before, value)
+  end
+
+  def convert_field_to_map({:after, value}, filters) do
+    Map.put(filters, :after, value)
+  end
+
+  def convert_field_to_map(_, filters) do
+    filters
   end
 
   def convert_field_to_query({:likes_emails, value}, query) do
@@ -21,6 +47,10 @@ defmodule GraphqlApi.Accounts do
 
   def convert_field_to_query({:likes_phone_calls, value}, query) do
     User.by_likes_phone_calls(query, value)
+  end
+
+  def convert_field_to_query(_, query) do
+    query
   end
 
   def find_user(params) do

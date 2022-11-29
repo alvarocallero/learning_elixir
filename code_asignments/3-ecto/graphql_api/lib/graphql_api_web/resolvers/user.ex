@@ -5,9 +5,10 @@ defmodule GraphqlApiWeb.Resolver.User do
 
   def find_by_id(%{id: id}, _) do
     id = String.to_integer(id)
-      %{id: id}
-      |> Accounts.find_user()
-      |> build_response
+
+    %{id: id}
+    |> Accounts.find_user()
+    |> build_response
   end
 
   def filter_by_preferences(params, _) do
