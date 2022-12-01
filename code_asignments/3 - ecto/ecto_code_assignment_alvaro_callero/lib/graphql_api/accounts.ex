@@ -7,17 +7,11 @@ defmodule GraphqlApi.Accounts do
 
   def list_users(params) do
     ecto_shorts_filters = Enum.reduce(params, %{}, &convert_field_to_map/2)
-
-    cond do
-      ecto_shorts_filters === %{} ->
-        params
-        |> Enum.reduce(User.join_preference(), &convert_field_to_query/2)
-        |> Repo.all()
-
-      true ->
-        params
-        |> Enum.reduce(User.join_preference(), &convert_field_to_query/2)
-        |> Actions.all(ecto_shorts_filters)
+    query = Enum.reduce(params, User.join_preference(), &convert_field_to_query/2)
+    if ecto_shorts_filters === %{} do
+      Repo.all(query)
+    else
+      Actions.all(query, ecto_shorts_filters)
     end
   end
 
@@ -58,7 +52,8 @@ defmodule GraphqlApi.Accounts do
   end
 
   def get_user_with_preferences(%{id: id}) do
-    user = Repo.one(from(u in User, where: u.id == ^id)) |> Repo.preload(:preference)
+    repo_result = Repo.one(from(u in User, where: u.id == ^id))
+    user = Repo.preload(repo_result, :preference)
     {:ok, user}
   end
 
@@ -75,7 +70,8 @@ defmodule GraphqlApi.Accounts do
   end
 
   def update_preferences(user, preferences) do
-    Repo.get(Preference, user.preference.id)
+    Preference
+    |> Repo.get(user.preference.id)
     |> Preference.changeset(preferences)
     |> Repo.update!()
 

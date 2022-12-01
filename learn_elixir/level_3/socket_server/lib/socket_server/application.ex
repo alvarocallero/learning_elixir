@@ -11,7 +11,7 @@ defmodule SocketServer.Application do
       # Start the Telemetry supervisor
 #      SocketServerWeb.Telemetry,
       # Start the PubSub system
-#      {Phoenix.PubSub, name: SocketServer.PubSub},
+      {Phoenix.PubSub, name: SocketServer.PubSub},
       # Start the Endpoint (http/https)
       SocketServerWeb.Endpoint,
       {Absinthe.Subscription, [SocketServerWeb.Endpoint]}

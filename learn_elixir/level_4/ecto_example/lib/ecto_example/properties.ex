@@ -25,5 +25,9 @@ defmodule EctoExample.Properties do
     |> House.by_lt_than_price(end_price)
   end
 
+  def convert_field_to_query({:by_address, value}, query) do
+    House.by_address(query, value)
+  end
+
 
 end

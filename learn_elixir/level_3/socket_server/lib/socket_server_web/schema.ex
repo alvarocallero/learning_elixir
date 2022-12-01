@@ -26,11 +26,13 @@ defmodule SocketServerWeb.Schema do
       trigger :create_user, topic: fn _ ->
         "new_user"
       end
+
+      config fn _, _ ->
+        {:ok, topic: "new_user"}
+      end
     end
 
-    config fn _, _ ->
-      {:ok, topic: "new_user"}
-    end
+
   end
 
 end

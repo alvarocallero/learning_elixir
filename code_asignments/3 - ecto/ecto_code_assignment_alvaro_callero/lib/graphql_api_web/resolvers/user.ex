@@ -12,22 +12,14 @@ defmodule GraphqlApiWeb.Resolver.User do
   end
 
   def filter_by_preferences(params, _) do
-    users =
-      params
-      |> Accounts.list_users()
-
+    users = Accounts.list_users(params)
     {:ok, users}
   end
 
   def update(%{id: id} = params, _) do
     id = String.to_integer(id)
-
-    params =
-      params
-      |> Map.delete(:id)
-
-    id
-    |> Accounts.update_user(params)
+    params = Map.delete(params, :id)
+    Accounts.update_user(id, params)
   end
 
   def create(params, _) do

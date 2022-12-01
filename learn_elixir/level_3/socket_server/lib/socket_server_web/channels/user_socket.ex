@@ -7,9 +7,6 @@ defmodule SocketServerWeb.UserSocket do
  channel "chat:*", SocketServerWeb.UserChannel
 
 
-  """
-With connect method we assign a user or some information to our socket
-"""
   @impl true
   def connect(_params, socket, _connect_info) do
     {:ok, socket}

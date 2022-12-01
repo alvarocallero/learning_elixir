@@ -3,10 +3,10 @@ defmodule GraphqlApi.Accounts.Preference do
   import Ecto.Changeset
 
   schema "preferences" do
-    field(:likes_emails, :boolean, default: false)
-    field(:likes_faxes, :boolean, default: false)
-    field(:likes_phone_calls, :boolean, default: false)
-    belongs_to(:user, GraphqlApi.Accounts.User)
+    field :likes_emails, :boolean, default: false
+    field :likes_faxes, :boolean, default: false
+    field :likes_phone_calls, :boolean, default: false
+    belongs_to :user, GraphqlApi.Accounts.User
   end
 
   @available_fields [:likes_emails, :likes_phone_calls, :likes_faxes]

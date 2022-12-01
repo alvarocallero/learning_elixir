@@ -1,8 +1,6 @@
 defmodule GraphqlApiWeb.Schema.Subscriptions.User do
   use Absinthe.Schema.Notation
 
-  alias GraphqlApiWeb.Resolver
-
   require Logger
 
   object :user_subscriptions do
@@ -21,7 +19,7 @@ defmodule GraphqlApiWeb.Schema.Subscriptions.User do
 
     @desc "Get a notification whenever a user preference gets updated"
     field :updated_user_preferences, :user_preferences do
-      arg(:id, non_null(:id))
+      arg :id, non_null :id
 
       config(fn args, _ ->
         {:ok, topic: args.id}
@@ -29,7 +27,7 @@ defmodule GraphqlApiWeb.Schema.Subscriptions.User do
 
       trigger(:update_user_preferences,
         topic: fn _ ->
-          "new_user"
+          "user_updated"
         end
       )
     end

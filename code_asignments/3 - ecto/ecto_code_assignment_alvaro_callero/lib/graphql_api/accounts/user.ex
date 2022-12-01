@@ -4,9 +4,9 @@ defmodule GraphqlApi.Accounts.User do
   import Ecto.Query
 
   schema "users" do
-    field(:email, :string)
-    field(:name, :string)
-    has_one(:preference, GraphqlApi.Accounts.Preference)
+    field :email, :string
+    field :name, :string
+    has_one :preference, GraphqlApi.Accounts.Preference
   end
 
   @available_fields [:name, :email]
