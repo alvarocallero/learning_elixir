@@ -10,7 +10,7 @@ defmodule GraphqlApi.Application do
     children = [
       {Phoenix.PubSub, name: GraphqlApi.PubSub},
       GraphqlApiWeb.Endpoint,
-      {Absinthe.Subscription, GraphqlApiWeb.Endpoint},
+      {Absinthe.Subscription, [GraphqlApiWeb.Endpoint]},
       GraphqlApi.Repo
     ]
 

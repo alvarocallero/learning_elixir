@@ -27,8 +27,9 @@ defmodule GraphqlApiWeb.Resolver.User do
   end
 
   def update_preferences(%{id: id} = params, _) do
-    with {:ok, user} <- Accounts.get_user_with_preferences(%{id: id}),
-         {:ok, _} <- empty_preferences?(params.preferences) do
+    with {:ok, _} <- empty_preferences?(params.preferences),
+         {:ok, user} <- Accounts.get_user_with_preferences(%{id: id})
+    do
       Accounts.update_preferences(user, params.preferences)
     else
       {:error, _} -> {:error, %{message: "not found", details: "not found"}}
@@ -36,9 +37,10 @@ defmodule GraphqlApiWeb.Resolver.User do
   end
 
   def build_response(result) do
-    case result do
-      {:error, _} -> {:error, %{message: "not found", details: "not found"}}
-      value -> value
+    if result |> elem(0) === :error do
+      {:error, %{message: "not found", details: "not found"}}
+    else
+      result
     end
   end
 
