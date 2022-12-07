@@ -7,11 +7,11 @@ defmodule GraphqlApiWeb.Router do
 
   scope "/" do
     pipe_through :api
-
-    forward "/graphql", Absinthe.Plug, schema: GraphqlApiWeb.Schema
-
-    forward "/graphiql", Absinthe.Plug.GraphiQL,
-      schema: GraphqlApiWeb.Schema,
-      socket: GraphqlApiWeb.UserSocket
   end
+
+  forward "/graphql", Absinthe.Plug, schema: GraphqlApiWeb.Schema
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+          schema: GraphqlApiWeb.Schema,
+          socket: GraphqlApiWeb.UserSocket,
+          interface: :playground
 end
