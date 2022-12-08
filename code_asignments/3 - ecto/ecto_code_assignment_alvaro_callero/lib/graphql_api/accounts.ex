@@ -6,6 +6,7 @@ defmodule GraphqlApi.Accounts do
   require Logger
 
   def list_users(params) do
+    IO.inspect params
     params
     |> create_query_with_preferences_filters()
     |> get_all_users(params)
@@ -42,28 +43,8 @@ defmodule GraphqlApi.Accounts do
     Enum.reduce(params, User.join_preference(), &convert_field_to_query/2)
   end
 
-  defp get_first_after_and_before_filters(params) do
-    Enum.reduce(params, %{}, &convert_field_to_map/2)
-  end
-
   defp get_all_users(query, params) do
-    Actions.all(query, get_first_after_and_before_filters(params))
-  end
-
-  defp convert_field_to_map({:first, value}, filters) do
-    Map.put(filters, :first, value)
-  end
-
-  defp convert_field_to_map({:before, value}, filters) do
-    Map.put(filters, :before, value)
-  end
-
-  defp convert_field_to_map({:after, value}, filters) do
-    Map.put(filters, :after, value)
-  end
-
-  defp convert_field_to_map(_, filters) do
-    filters
+    Actions.all(query, params)
   end
 
   defp convert_field_to_query({:likes_emails, value}, query) do

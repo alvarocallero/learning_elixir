@@ -7,7 +7,7 @@ defmodule GraphqlApiWeb.Types.User do
     field :id, :id
     field :name, :string
     field :email, :string
-    field :preference, :user_preferences, resolve: dataloader GraphqlApi.Accounts, :preference
+    field :preference, :user_preferences, resolve: dataloader(GraphqlApi.Accounts, :preference)
   end
 
   @desc "The preferences that each user has"

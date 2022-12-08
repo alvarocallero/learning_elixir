@@ -18,13 +18,13 @@ defmodule GraphqlApiWeb.Schema do
     import_fields :user_subscriptions
   end
 
-  def context ctx do
-    source = Dataloader.Ecto.new GraphqlApi.Repo
-    dataloader = Dataloader.add_source(Dataloader.new, GraphqlApi.Accounts, source)
-    Map.put ctx, :loader, dataloader
+  def context(ctx) do
+    source = Dataloader.Ecto.new(GraphqlApi.Repo)
+    dataloader = Dataloader.add_source(Dataloader.new(), GraphqlApi.Accounts, source)
+    Map.put(ctx, :loader, dataloader)
   end
 
   def plugins do
-    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults 
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
   end
 end

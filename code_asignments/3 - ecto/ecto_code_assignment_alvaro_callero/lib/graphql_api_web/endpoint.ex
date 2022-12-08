@@ -11,8 +11,9 @@ defmodule GraphqlApiWeb.Endpoint do
     signing_salt: "skbBcMyl"
   ]
 
-  socket "/socket", GraphqlApiWeb.UserSocket, websocket: true,
-                                              longpoll: false
+  socket "/socket", GraphqlApiWeb.UserSocket,
+    websocket: true,
+    longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #
