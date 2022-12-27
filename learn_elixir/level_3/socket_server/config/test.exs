@@ -8,8 +8,7 @@ config :socket_server, SocketServerWeb.Endpoint,
   server: false
 
 # In test we don't send emails.
-config :socket_server, SocketServer.Mailer,
-  adapter: Swoosh.Adapters.Test
+config :socket_server, SocketServer.Mailer, adapter: Swoosh.Adapters.Test
 
 # Print only warnings and errors during test
 config :logger, level: :warn

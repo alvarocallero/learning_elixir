@@ -2,10 +2,11 @@ defmodule SocketServerWeb.ChatChannel do
   use SocketServerWeb, :channel
 
   """
-  And so this is a very simple, we now have created a chat room that has an id
-  and we'll broadcast messages to all those individual chat rooms depending on which chat room socket
-  sent that message
-"""
+    And so this is a very simple, we now have created a chat room that has an id
+    and we'll broadcast messages to all those individual chat rooms depending on which chat room socket
+    sent that message
+  """
+
   def join("chat_room:" <> id, payload, socket) do
     if authorized?(payload) do
       {:ok, socket}
@@ -15,7 +16,7 @@ defmodule SocketServerWeb.ChatChannel do
   end
 
   def handle_in("send message", %{"message" => message}, socket) do
-    broadcast "send_message", socket, %{"message" => message}
+    broadcast("send_message", socket, %{"message" => message})
 
     {:noreply, socket}
   end

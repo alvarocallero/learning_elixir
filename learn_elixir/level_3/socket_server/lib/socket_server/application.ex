@@ -9,7 +9,7 @@ defmodule SocketServer.Application do
   def start(_type, _args) do
     children = [
       # Start the Telemetry supervisor
-#      SocketServerWeb.Telemetry,
+      #      SocketServerWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: SocketServer.PubSub},
       # Start the Endpoint (http/https)

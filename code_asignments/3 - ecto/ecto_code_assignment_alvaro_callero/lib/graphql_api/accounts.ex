@@ -6,7 +6,6 @@ defmodule GraphqlApi.Accounts do
   require Logger
 
   def list_users(params) do
-    IO.inspect params
     params
     |> create_query_with_preferences_filters()
     |> get_all_users(params)
@@ -15,7 +14,6 @@ defmodule GraphqlApi.Accounts do
   def find_user(params) do
     Actions.find(User, params)
   end
-
   def get_user_with_preferences(%{id: id}) do
     repo_result = Repo.one(from(u in User, where: u.id == ^id))
     user = Repo.preload(repo_result, :preference)
@@ -63,3 +61,8 @@ defmodule GraphqlApi.Accounts do
     query
   end
 end
+
+input size 1000
+
+20 ms
+

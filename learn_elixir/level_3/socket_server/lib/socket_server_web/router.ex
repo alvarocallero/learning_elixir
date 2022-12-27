@@ -8,8 +8,7 @@ defmodule SocketServerWeb.Router do
   scope "/", SocketServerWeb do
     pipe_through :api
 
-    forward "/graphql", Absinthe.Plug,
-      schema: SocketServerWeb.Schema
+    forward "/graphql", Absinthe.Plug, schema: SocketServerWeb.Schema
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: SocketServerWeb.Schema,
