@@ -1,21 +1,14 @@
 defmodule GraphqlApiWeb.Schema.Queries.UserTest do
-  use GraphqlApiWeb.DataCase
+  use GraphqlApiWeb.DataCase, async: true
 
   alias GraphqlApiWeb.Schema
   alias GraphqlApi.Accounts
-  alias GraphqlApi.RequestsManager
+  alias GraphqlApiWeb.UserHelper
 
   @get_all_users_doc """
   query AllUsers {
     users{
-        id
-        email
-        name
-        preference{
-          likesEmails
-          likesFaxes
-          likesPhoneCalls
-        }
+      #{UserHelper.get_fields_to_fetch_from_user()}
       }
     }
   """
@@ -23,14 +16,7 @@ defmodule GraphqlApiWeb.Schema.Queries.UserTest do
   @get_one_user_doc """
   query OneUser($id: ID!) {
     user(id: $id){
-        id
-        email
-        name
-        preference{
-          likesEmails
-          likesFaxes
-          likesPhoneCalls
-        }
+      #{UserHelper.get_fields_to_fetch_from_user()}
       }
     }
   """
@@ -41,22 +27,11 @@ defmodule GraphqlApiWeb.Schema.Queries.UserTest do
     }
   """
 
-  @test_user %{
-    name: "Peter Parker",
-    email: "peter@parker.com.uy",
-    preference: %{
-      likesEmails: true,
-      likesFaxes: true,
-      likesPhoneCalls: true
-    }
-  }
-
   describe "@users" do
     test "fetches all users" do
       assert {:ok, %{data: old_data}} = Absinthe.run(@get_all_users_doc, Schema)
 
-      assert {:ok, user} =
-               Accounts.create_user(@test_user)
+      assert {:ok, user} = Accounts.create_user(UserHelper.get_user())
 
       assert {:ok, %{data: new_data}} = Absinthe.run(@get_all_users_doc, Schema)
       assert length(old_data["users"]) + 1 == length(new_data["users"])
@@ -71,9 +46,8 @@ defmodule GraphqlApiWeb.Schema.Queries.UserTest do
   end
 
   describe "@user" do
-    test "fetch a specific user" do
-      assert {:ok, user} =
-               Accounts.create_user(@test_user)
+    test "fetch a specific user by id" do
+      assert {:ok, user} = Accounts.create_user(UserHelper.get_user())
 
       assert {:ok, %{data: data}} =
                Absinthe.run(@get_one_user_doc, Schema,
@@ -89,17 +63,17 @@ defmodule GraphqlApiWeb.Schema.Queries.UserTest do
   end
 
   describe "@resolver_hits" do
-    test "get the hits count of the request get all users query" do
-
+    test "get the hits count of get_all_users request query" do
       assert {:ok, %{data: data}} =
                Absinthe.run(@get_request_hits_counter, Schema,
                  variables: %{
                    "key" => "users"
                  }
                )
+
       initial_hits_counter = data["resolver_hits"]
 
-      assert {:ok, %{data: get_users_data}} = Absinthe.run(@get_all_users_doc, Schema)
+      assert {:ok, %{data: _get_users_data}} = Absinthe.run(@get_all_users_doc, Schema)
 
       assert {:ok, %{data: new_data}} =
                Absinthe.run(@get_request_hits_counter, Schema,
