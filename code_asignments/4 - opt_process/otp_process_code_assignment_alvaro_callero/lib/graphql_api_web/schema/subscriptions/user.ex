@@ -22,7 +22,7 @@ defmodule GraphqlApiWeb.Schema.Subscriptions.User do
       arg :id, non_null(:id)
 
       config(fn args, _ ->
-        {:ok, topic: args.id}
+        {:ok, topic: "updated_user_preferences-" <> args.id}
       end)
 
       trigger(:update_user_preferences,

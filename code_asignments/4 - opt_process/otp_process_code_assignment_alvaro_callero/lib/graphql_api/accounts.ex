@@ -47,15 +47,15 @@ defmodule GraphqlApi.Accounts do
   end
 
   defp convert_field_to_query({:likes_emails, value}, query) do
-    User.by_likes_emails(query, value)
+    User.by_likes_emails_or_faxes_or_phone_calls(query, {:likes_emails, value})
   end
 
   defp convert_field_to_query({:likes_faxes, value}, query) do
-    User.by_likes_faxes(query, value)
+    User.by_likes_emails_or_faxes_or_phone_calls(query, {:likes_faxes, value})
   end
 
   defp convert_field_to_query({:likes_phone_calls, value}, query) do
-    User.by_likes_phone_calls(query, value)
+    User.by_likes_emails_or_faxes_or_phone_calls(query, {:likes_phone_calls, value})
   end
 
   defp convert_field_to_query(_, query) do

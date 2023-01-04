@@ -27,15 +27,8 @@ defmodule GraphqlApi.Accounts.User do
     join(query, :inner, [u], p in assoc(u, :preference), as: :preference)
   end
 
-  def by_likes_emails(query, likes_emails) do
-    where(query, [preference: p], p.likes_emails == ^likes_emails)
+  def by_likes_emails_or_faxes_or_phone_calls(query, {likes_filter, value}) do
+    where(query, [preference: p], field(p, ^likes_filter) == ^value)
   end
 
-  def by_likes_faxes(query, likes_faxes) do
-    where(query, [preference: p], p.likes_faxes == ^likes_faxes)
-  end
-
-  def by_likes_phone_calls(query, phone_calls) do
-    where(query, [preference: p], p.likes_phone_calls == ^phone_calls)
-  end
 end
