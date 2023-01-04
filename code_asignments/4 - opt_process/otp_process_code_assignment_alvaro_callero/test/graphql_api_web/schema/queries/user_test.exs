@@ -39,9 +39,9 @@ defmodule GraphqlApiWeb.Schema.Queries.UserTest do
       search_result =
         new_data["users"]
         |> Enum.filter(&(&1["name"] === user.name))
-        |> length != 0
+        |> length !== 0
 
-      assert search_result == true
+      assert search_result === true
     end
   end
 
@@ -63,15 +63,16 @@ defmodule GraphqlApiWeb.Schema.Queries.UserTest do
   end
 
   describe "@resolver_hits" do
-    test "get the hits count of get_all_users request query" do
-      assert {:ok, %{data: data}} =
-               Absinthe.run(@get_request_hits_counter, Schema,
-                 variables: %{
-                   "key" => "users"
-                 }
-               )
-
-      initial_hits_counter = data["resolver_hits"]
+    setup do
+      {:ok, %{data: data}} =
+        Absinthe.run(@get_request_hits_counter, Schema,
+          variables: %{
+            "key" => "users"
+          }
+        )
+      {:ok, initial_counter: (if (data["resolver_hits"] === nil), do: 0, else: data["resolver_hits"])}
+    end
+    test "get the hits count of get_all_users request query", state do
 
       assert {:ok, %{data: _get_users_data}} = Absinthe.run(@get_all_users_doc, Schema)
 
@@ -84,7 +85,7 @@ defmodule GraphqlApiWeb.Schema.Queries.UserTest do
 
       final_hits_counter = new_data["resolver_hits"]
 
-      assert initial_hits_counter + 1 === final_hits_counter
+      assert state[:initial_counter] + 1 === final_hits_counter
     end
   end
 end

@@ -10,7 +10,7 @@ defmodule GraphqlApi.RequestsManagerTest do
 
   describe "&add_request_hit/2" do
     test "add a hit to the requests counter", %{pid: pid} do
-      assert RequestsManager.get_request_hits(pid, "users") === 0
+      assert RequestsManager.get_request_hits(pid, "users") === nil
       RequestsManager.add_request_hit(pid, "users")
       RequestsManager.add_request_hit(pid, "users")
       RequestsManager.add_request_hit(pid, "users")

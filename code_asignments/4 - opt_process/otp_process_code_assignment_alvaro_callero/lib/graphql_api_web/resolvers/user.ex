@@ -34,11 +34,9 @@ defmodule GraphqlApiWeb.Resolver.User do
   def update_preferences(%{id: id} = params, _) do
     RequestsManager.add_request_hit("update_user_preferences")
 
-    with {:ok, _} <- empty_preferences?(params.preferences),
+    with {:ok} <- empty_preferences?(params.preferences),
          {:ok, user} <- Accounts.get_user_with_preferences(%{id: id}) do
       Accounts.update_preferences(user, params.preferences)
-    else
-      {:error, _} -> {:error, %{message: "not found", details: "not found"}}
     end
   end
 
@@ -53,5 +51,5 @@ defmodule GraphqlApiWeb.Resolver.User do
   defp empty_preferences?(preferences) when preferences === %{},
     do: {:error, %{message: "at least one preference must be provided", details: preferences}}
 
-  defp empty_preferences?(_preferences), do: {:ok, " "}
+  defp empty_preferences?(_preferences), do: {:ok}
 end
